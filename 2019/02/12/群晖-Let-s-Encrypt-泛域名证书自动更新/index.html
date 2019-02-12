@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/task-inv.png">
 <meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/task-cmd.png">
 <meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/task-run.png">
-<meta property="og:updated_time" content="2019-02-12T10:14:45.014Z">
+<meta property="og:updated_time" content="2019-02-12T10:21:24.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="群晖 Let&#39;s Encrypt 泛域名证书自动更新">
 <meta name="twitter:description" content="文章来源: http://www.up4dev.com/2018/05/29/synology-ssl-wildcard-cert-update/， 本站资源来源于网络，本站转载出于传递更多信息之目的，版权归原作者或者来源机构所有，如转载稿涉及版权问题，请联系我们。  去年曾经写过一篇文章介绍如何在群晖的 NAS 通过 acme 协议更新 Let’s Encrypt 的 HTTPS 证书。最近突">
@@ -373,8 +373,8 @@
 <p>这样脚本就会运行，自动更新证书，并重启web服务器加载新的脚本。以后，NAS会每隔一个月执行一次该脚本，自动更新证书。</p>
 <h3 id="回滚"><a href="#回滚" class="headerlink" title="回滚"></a>回滚</h3><p>脚本里提供了回滚命令，可以通过ssh登录到nas，定位到对应目录，执行如下命令回滚证书目录到备份的状态：</p>
 <p><code>/volume1/nas_share/certs/syno-acme/cert-up.sh revert</code></p>
-<p>##总结<br>这个一键脚本的特点是最小限度的触碰系统文件，仅<code>/usr/syno/etc/certificate/_archive</code>目录会被更改。<code>acme.sh</code>工具随用随时下载，保持最新，用完即删除，不占用磁盘空间。</p>
-<p>这基本就是本文的全部了，如果大家使用中遇到问题，可以在这里留言或者到 <a href="https://github.com/andyzhshg/syno-acme/issues" target="_blank" rel="noopener">https://github.com/andyzhshg/syno-acme/issues</a> 提<code>issue</code>。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个一键脚本的特点是最小限度的触碰系统文件，仅<code>/usr/syno/etc/certificate/_archive</code>目录会被更改。<code>acme.sh</code>工具随用随时下载，保持最新，用完即删除，不占用磁盘空间。</p>
+<p>这基本就是本文的全部了，如果大家使用中遇到问题，可以在这里留言或者到<br><a href="https://github.com/andyzhshg/syno-acme/issues" target="_blank" rel="noopener">https://github.com/andyzhshg/syno-acme/issues</a> 提<code>issue</code>。</p>
 
       
     </div>
@@ -536,7 +536,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-准备工作"><span class="nav-number">1.</span> <span class="nav-text">1. 准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-下载一键更新脚本"><span class="nav-number">2.</span> <span class="nav-text">2. 下载一键更新脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-配置脚本参数"><span class="nav-number">3.</span> <span class="nav-text">3. 配置脚本参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-配置定时任务"><span class="nav-number">4.</span> <span class="nav-text">4. 配置定时任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查找脚本路径"><span class="nav-number">4.1.</span> <span class="nav-text">查找脚本路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建定时任务"><span class="nav-number">4.2.</span> <span class="nav-text">创建定时任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#试运行脚本"><span class="nav-number">4.3.</span> <span class="nav-text">试运行脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回滚"><span class="nav-number">4.4.</span> <span class="nav-text">回滚</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-准备工作"><span class="nav-number">1.</span> <span class="nav-text">1. 准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-下载一键更新脚本"><span class="nav-number">2.</span> <span class="nav-text">2. 下载一键更新脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-配置脚本参数"><span class="nav-number">3.</span> <span class="nav-text">3. 配置脚本参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-配置定时任务"><span class="nav-number">4.</span> <span class="nav-text">4. 配置定时任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查找脚本路径"><span class="nav-number">4.1.</span> <span class="nav-text">查找脚本路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建定时任务"><span class="nav-number">4.2.</span> <span class="nav-text">创建定时任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#试运行脚本"><span class="nav-number">4.3.</span> <span class="nav-text">试运行脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回滚"><span class="nav-number">4.4.</span> <span class="nav-text">回滚</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
