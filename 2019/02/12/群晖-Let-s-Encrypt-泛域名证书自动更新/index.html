@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="软件">
+  <meta name="keywords" content="群晖,">
 
 
 
@@ -79,13 +79,30 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="日备">
-<meta property="og:url" content="https://blog.homecloud.work/index.html">
+<meta name="description" content="文章来源: http://www.up4dev.com/2018/05/29/synology-ssl-wildcard-cert-update/， 本站资源来源于网络，本站转载出于传递更多信息之目的，版权归原作者或者来源机构所有，如转载稿涉及版权问题，请联系我们。  去年曾经写过一篇文章介绍如何在群晖的 NAS 通过 acme 协议更新 Let’s Encrypt 的 HTTPS 证书。最近突">
+<meta name="keywords" content="群晖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="群晖 Let&#39;s Encrypt 泛域名证书自动更新">
+<meta property="og:url" content="https://blog.homecloud.work/2019/02/12/群晖-Let-s-Encrypt-泛域名证书自动更新/index.html">
 <meta property="og:site_name" content="日备">
+<meta property="og:description" content="文章来源: http://www.up4dev.com/2018/05/29/synology-ssl-wildcard-cert-update/， 本站资源来源于网络，本站转载出于传递更多信息之目的，版权归原作者或者来源机构所有，如转载稿涉及版权问题，请联系我们。  去年曾经写过一篇文章介绍如何在群晖的 NAS 通过 acme 协议更新 Let’s Encrypt 的 HTTPS 证书。最近突">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/cert-list.png">
+<meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/unzip.png">
+<meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/config.png">
+<meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/apikey.png">
+<meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/file-info.png">
+<meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/file-path.png">
+<meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/task.png">
+<meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/task-name.png">
+<meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/task-inv.png">
+<meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/task-cmd.png">
+<meta property="og:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/task-run.png">
+<meta property="og:updated_time" content="2019-02-12T10:13:06.917Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="日备">
+<meta name="twitter:title" content="群晖 Let&#39;s Encrypt 泛域名证书自动更新">
+<meta name="twitter:description" content="文章来源: http://www.up4dev.com/2018/05/29/synology-ssl-wildcard-cert-update/， 本站资源来源于网络，本站转载出于传递更多信息之目的，版权归原作者或者来源机构所有，如转载稿涉及版权问题，请联系我们。  去年曾经写过一篇文章介绍如何在群晖的 NAS 通过 acme 协议更新 Let’s Encrypt 的 HTTPS 证书。最近突">
+<meta name="twitter:image" content="https://up4dev.oss-cn-qingdao.aliyuncs.com/nas-cert-up/cert-list.png">
 
 
 
@@ -115,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="https://blog.homecloud.work/">
+  <link rel="canonical" href="https://blog.homecloud.work/2019/02/12/群晖-Let-s-Encrypt-泛域名证书自动更新/">
 
 
 
 
 
-  <title>日备</title>
+  <title>群晖 Let's Encrypt 泛域名证书自动更新 | 日备</title>
   
 
 
@@ -140,8 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -234,9 +250,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -266,9 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/12/群晖-Let-s-Encrypt-泛域名证书自动更新/" itemprop="url">群晖 Let's Encrypt 泛域名证书自动更新</a></h1>
+          <h1 class="post-title" itemprop="name headline">群晖 Let's Encrypt 泛域名证书自动更新</h1>
         
 
         <div class="post-meta">
@@ -318,9 +332,7 @@
       
 
       
-        
-          
-            <blockquote>
+        <blockquote>
 <p>文章来源: <a href="http://www.up4dev.com/2018/05/29/synology-ssl-wildcard-cert-update/" target="_blank" rel="noopener">http://www.up4dev.com/2018/05/29/synology-ssl-wildcard-cert-update/</a>， 本站资源来源于网络，本站转载出于传递更多信息之目的，版权归原作者或者来源机构所有，如转载稿涉及版权问题，请联系我们。</p>
 </blockquote>
 <p>去年曾经写过一篇文章介绍<a href="http://www.up4dev.com/2017/09/11/synology-ssl-cert-update/" target="_blank" rel="noopener">如何在群晖的 NAS 通过 acme 协议更新 Let’s Encrypt 的 HTTPS 证书</a>。最近突然发现acme协议版本更新，开始支持泛域名(wildcard)，也就是说，可以申请一个类似<code>*.domain.com</code>的单一证书，就可以适配<code>abc.domain.com</code>，<code>xyz.domain.com</code>这类的子域名，而不需要单独为每个子域名申请证书了。</p>
@@ -363,8 +375,6 @@
 <p>##总结<br>这个一键脚本的特点是最小限度的触碰系统文件，仅<code>/usr/syno/etc/certificate/_archive</code>目录会被更改。<code>acme.sh</code>工具随用随时下载，保持最新，用完即删除，不占用磁盘空间。</p>
 <p>这基本就是本文的全部了，如果大家使用中遇到问题，可以在这里留言或者到 <a href="https://github.com/andyzhshg/syno-acme/issues" target="_blank" rel="noopener">https://github.com/andyzhshg/syno-acme/issues</a> 提<code>issue</code>。</p>
 
-          
-        
       
     </div>
     
@@ -379,14 +389,20 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/群晖/" rel="tag"># 群晖</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -396,10 +412,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -407,6 +424,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -427,8 +448,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -479,6 +509,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-准备工作"><span class="nav-number">1.</span> <span class="nav-text">1. 准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-下载一键更新脚本"><span class="nav-number">2.</span> <span class="nav-text">2. 下载一键更新脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-配置脚本参数"><span class="nav-number">3.</span> <span class="nav-text">3. 配置脚本参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-配置定时任务"><span class="nav-number">4.</span> <span class="nav-text">4. 配置定时任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查找脚本路径"><span class="nav-number">4.1.</span> <span class="nav-text">查找脚本路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建定时任务"><span class="nav-number">4.2.</span> <span class="nav-text">创建定时任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#试运行脚本"><span class="nav-number">4.3.</span> <span class="nav-text">试运行脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回滚"><span class="nav-number">4.4.</span> <span class="nav-text">回滚</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -612,6 +658,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
