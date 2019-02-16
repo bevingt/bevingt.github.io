@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[GitHub删除文件夹]]></title>
+    <url>%2F2019%2F02%2Fgithub-delete-folder.html</url>
+    <content type="text"><![CDATA[同步远程仓库 1git pull origin master 删除filename文件夹 1git rm -r --cached filename 提交操作说明 1git commit -m &apos;删除了filename&apos; 将本次变动更新至github项目上 1git push -u origin master]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[群晖 Let's Encrypt 泛域名证书自动更新]]></title>
+    <url>%2F2019%2F02%2Fsynology-lets-encrypt-automatic-update-of-pandomain-certificate.html</url>
+    <content type="text"><![CDATA[文章来源: http://www.up4dev.com/2018/05/29/synology-ssl-wildcard-cert-update/， 本站资源来源于网络，本站转载出于传递更多信息之目的，版权归原作者或者来源机构所有，如转载稿涉及版权问题，请联系我们。 去年曾经写过一篇文章介绍如何在群晖的 NAS 通过 acme 协议更新 Let’s Encrypt 的 HTTPS 证书。最近突然发现acme协议版本更新，开始支持泛域名(wildcard)，也就是说，可以申请一个类似*.domain.com的单一证书，就可以适配abc.domain.com，xyz.domain.com这类的子域名，而不需要单独为每个子域名申请证书了。 Neilpang/acme.sh 工具很快就支持新的协议了，我这篇文章就是在这个工具的基础上，实现泛域名的自动更新。为了减少复杂度，我编写了一个一键更新的懒人脚本，来帮助不愿意了解原理的同学快速部署。 1. 准备工作因为我介绍的方法是一键替换群晖的默认证书，所以，为了防止意外，最好保证你的证书列表里只有一条记录，即默认证书那一条。实际上因为支持了泛域名证书，基本上这一条记录就足够用了（当然，如果你要管理多个域名，可能本文的方法并不实用）。所以开始工作前你的证书列表大概应该是这个样子： 2. 下载一键更新脚本这是一键脚本的项目地址：andyzhshg/syno-acme。 如果你对项目本身不感兴趣，可以直接下载打包好的工具：Latest release。 可以通过 File Station 将下载的工具上传到NAS的任意目录下，并解压。 解压后大概是这个样子： 3. 配置脚本参数编辑脚本的配置文件config: 如图所示，需要编辑的几个字段我用蓝框标记出来了。 首先是DOMAIN，也就是你的域名。 然后是DNS的类型，根据服务商的不同，DNS类型各不相同，比如阿里云（dns_ali），Dnspod（dns_dp），Godaddy（dns_gd）等。 最后要根据不同的服务商配置服务上提供的授权密钥等信息，比如我的域名服务商是阿里云，我需要编辑Ali_Key和Ali_Secret字段，字段的内容需要到域名服务商的管理后台来查看，因为不同的服务商的查看方式不同，请大家根据自己的实际情况去查找吧。 需要指出的是，我给出的配置文件模板并没有给出所有acme.sh支持的域名服务商，大家可以参照 https://github.com/Neilpang/acme.sh/tree/master/dnsapi来添加自己的配置。一般情况下，这个页面每个文件对应一个域名服务商，比如dns_ali.sh就是对应阿里云，文件名去掉.sh扩展名就是DNS类型，比如阿里云的DNS类型就是dns_ali。打开对应文件， 一般都可以在文件的头部找到需要设置的授权信息对应的密钥，比如阿里云的授权密钥所在的位置如下图所示： config模板中没有的服务商，请大家自行完善。 [^2018.05.31]: 针对评论区同学提出的 Linode 的 API 生效时间的问题，增加了一个配置参数DNS_SLEEP，出现类似问题的话可以通过修改增大这个参数来解决。 4. 配置定时任务查找脚本路径在 File Station 中定位到下载的一键脚本的目录，查看该脚本的绝对路径： 复制完整的绝对路径到剪贴板。 创建定时任务打开 控制面板 / 任务计划 / 新增 / 计划的任务 / 用户自定义的脚本： 设置任务名称和操作用户，需要注意的是这里一定要选择root： 设置计划的时间和周期，老版本只支持按月或者年重复，系统更新至最新后，可选取按三个月重复，这样就能满足 Let’s Encrypt 至少3个月更新一次的要求： 设置执行脚本，这里我们将脚本的输出重定向到了一个log.txt的文件中，以方便后期查看脚本的执行情况： 上图红框中的脚本命令为少update(注意没有换行)，以下面代码为准： 1/volume1/nas_share/certs/syno-acme/cert-up.sh update &gt;&gt; /volume1/nas_share/certs/syno-acme/log.txt 2&gt;&amp;1 具体的路径是前面复制的路径。 试运行脚本可以在新建的任务上点击右键立即执行任务： 这样脚本就会运行，自动更新证书，并重启web服务器加载新的脚本。以后，NAS会每隔一个月执行一次该脚本，自动更新证书。 回滚脚本里提供了回滚命令，可以通过ssh登录到nas，定位到对应目录，执行如下命令回滚证书目录到备份的状态： 1/volume1/nas_share/certs/syno-acme/cert-up.sh revert 总结这个一键脚本的特点是最小限度的触碰系统文件，仅/usr/syno/etc/certificate/_archive目录会被更改。acme.sh工具随用随时下载，保持最新，用完即删除，不占用磁盘空间。 这基本就是本文的全部了，如果大家使用中遇到问题，可以在这里留言或者到https://github.com/andyzhshg/syno-acme/issues 提issue。]]></content>
+      <categories>
+        <category>NAS</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>证书</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[华硕梅林插件 - 科学上网]]></title>
+    <url>%2F2019%2F02%2Fasus-merlin-plugin-science-online.html</url>
+    <content type="text"><![CDATA[此项目提供用于asuswrt/merlin改版固件路由器科学上网。 转自hq450/fancyss 机型/固件支持fancyss_hndfancyss_hnd离线安装包仅适用于asus/merlin koolshare hnd/axhnd平台机型改版固件（armV8架构，linux内核版本：4.1.27/4.1.51，bcm490X系列cpu） fancyss_hnd支持机型/固件： RT-AC86U merlin改版固件 RT-AC86U 官改固件 GT-AC5300 官改固件 注意： 其它arm架构或mipsel架构的merlin固件不能使用fancyss_hnd！ GT-AC5300/RT-AC86U官该固件使用的是ROG皮肤，插件安装会自动识别机型并安装对应皮肤版本。 相关链接： hnd机型的科学上网离线包：https://github.com/hq450/fancyss_history_package/tree/master/fancyss_hnd hnd机型的科学上网更新日志：https://github.com/hq450/fancyss/blob/master/fancyss_hnd/Changelog.txt hnd机型的固件下载地址：http://koolshare.cn/forum-96-1.html fancyss_armfancyss_arm离线安装包仅适用于merlin koolshare arm架构机型改版固件（armV7架构，linux内核版本：2.6.36.4，bcm470X系列cpu） fancyss_arm支持机型（需刷梅林koolshare改版固件）： 华硕系列：RT-AC56U RT-AC68U RT-AC66U-B1 RT-AC1900P RT-AC87U RT-AC88U RT-AC3100 RT-AC3200 RT-AC5300 网件系列：R6300V2 R6400 R6900 R7000 R8000 R8500 linksys EA系列：EA6200 EA6400 EA6500v2 EA6700 EA6900 华为：ws880 注意： fancyss_arm仅支持版本号≥X7.2的固件（订阅功能需要版本号≥X7.7） RT-AC86U和GT-AC5300两款机器不能使用fancyss_arm！因为这两款机器的是新架构，请使用fancyss_hnd！ RT-AC66U和RT-N66U也不能使用fancyss_arm！因为这两款机器的是mipsel架构，请使用fancyss_mipsel！ 相关链接： arm机型的科学上网离线包：https://github.com/hq450/fancyss_history_package/tree/master/fancyss_arm arm机型的科学上网更新日志：https://github.com/hq450/fancyss/blob/master/fancyss_arm/Changelog.txt arm机型的固件下载地址：http://koolshare.cn/forum-96-1.html fancyss_mipsel适用于merlin koolshare mipsel架构机型的改版固件，由于mipsel架构老旧且性能较低，此架构机型的科学上网插件已经不再维护，最后的版本是3.0.4，此处作为仓库搬迁后的备份留存。 fancyss_mipsel支持机型（需刷梅林koolshare改版固件）： 华硕系列：RT-N66U RT-AC66U（非RT-AC66U-B1） 相关链接： mipsel机型的科学上网离线包：https://github.com/hq450/fancyss_history_package/tree/master/fancyss_mipsel mipsel机型的固件下载地址：http://koolshare.cn/forum-96-1.html]]></content>
+      <categories>
+        <category>路由器</category>
+      </categories>
+      <tags>
+        <tag>梅林</tag>
+        <tag>华硕</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MacOS下的全格式视频播放器-iina]]></title>
+    <url>%2F2019%2F02%2Ffull-format-video-player-under-macos-iina.html</url>
+    <content type="text"><![CDATA[刚接触Mac时，一直找不到好用的本地视频播放器，尝试过MplayerX、VLC，也付费过射手影音，最终在Github上找到了iina，该播放器开源免费，完全符合日常看视频的需求。整体界面整洁清爽，设计风格也完全贴合MacOS，符合大众审美。 安装方式有2种： Github下载最新版本，下载后直接安装。 Mac上需要先安装Homebrew，同时安装iina需用到cask插件库，然后打开终端并运行：1brew cask install iina]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>mac</tag>
+        <tag>播放器</tag>
+      </tags>
+  </entry>
+</search>
